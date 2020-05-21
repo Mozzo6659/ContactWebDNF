@@ -6,7 +6,8 @@ using ContactWebDNF.Models;
 
 namespace ContactWebDNF.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "Admin")]
+
     //https://code.msdn.microsoft.com/ASPNET-MVC-5-Security-And-44cbdb97 blog for security
     public class StatesController : Controller
     {

@@ -21,7 +21,7 @@ namespace ContactWebDNF
             app.CreatePerOwinContext<ApplicationSignInManager>(ApplicationSignInManager.Create);
 
 
-            createRolesAndUsers();
+            CreateRolesAndUsers();
             // Enable the application to use a cookie to store information for the signed in user
             // and to use a cookie to temporarily store information about a user logging in with a third party login provider
             // Configure the sign in cookie
@@ -67,7 +67,7 @@ namespace ContactWebDNF
             //    ClientSecret = ""
             //});
         }
-        private void createRolesAndUsers()
+        private void CreateRolesAndUsers()
         {
             ApplicationDbContext context = new ApplicationDbContext();
 
@@ -81,14 +81,17 @@ namespace ContactWebDNF
                 roleManager.Create(role);
 
                 var user = new ApplicationUser();
-                user.UserName = "Super Admin";
-                user.Email = "testrole@test.com";
+                user.UserName = "testsuper@test.com"; //these need to be the same or it doesnt woirk
+                user.Email = "testsuper@test.com";
 
                 var chkuser = userManager.Create(user, "mudguts36");
 
-                if (chkuser.Succeeded)
+                if (!chkuser.Succeeded)
                 {
-                    var result = userManager.AddToRole(user.Id, "Admin");
+                    throw new Exception("Could not create Super Admin");
+                }else
+                {
+                   userManager.AddToRole(user.Id, "Admin");
                 }
             }
 

@@ -26,6 +26,8 @@ namespace ContactWebDNF.Models
     {
         public DbSet<State> States { get; set; }
         public DbSet<Contact> Contacts { get; set; }
+
+        public DbSet<ApplicationUser> ApplicationUsers { get; }
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
         {

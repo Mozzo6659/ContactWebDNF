@@ -35,8 +35,6 @@ namespace ContactWebDNF.Models
         [Required(ErrorMessage = "Address is required")]
         [StringLength(ContactWebConstants.MAX_ADDRESS_LENGTH)]
         public string Address2 { get; set; }
-
-        [Required]
         [StringLength(ContactWebConstants.MAX_CITY_LENGTH)]
         public string City { get; set; }
 

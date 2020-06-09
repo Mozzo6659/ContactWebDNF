@@ -19,20 +19,22 @@ namespace ContactWebDNF.Controllers
         // GET: Contacts
         public ActionResult Index()
         {
+            _userId = GetCurrentUserId(); //why do this, Just use the Function
             //limit contacts to only those for this user
-            var contacts = db.Contacts.Include(c => c.State).Include(c => c.User).Where(x => x.UserId == GetCuurrentuserId());
+            var contacts = db.Contacts.Include(c => c.State).Include(c => c.User).Where(x => x.UserId == _userId);
             return View(contacts.ToList());
         }
 
         // GET: Contacts/Details/5
         public ActionResult Details(int? id)
         {
-           
+            _userId = GetCurrentUserId(); //why do this, Just use the Function
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Contact contact = db.Contacts.FirstOrDefault(x => x.Id == id && x.UserId == GetCuurrentuserId());
+            Contact contact = db.Contacts.FirstOrDefault(x => x.Id == id && x.UserId == _userId);
             if (contact == null)
             {
                 return HttpNotFound();
@@ -43,7 +45,7 @@ namespace ContactWebDNF.Controllers
         // GET: Contacts/Create
         public ActionResult Create()
         {
-            _userId = GetCuurrentuserId();
+            _userId = GetCurrentUserId();
             
             
 
@@ -59,10 +61,13 @@ namespace ContactWebDNF.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Id,FirstName,LastName,Email,Phone,Birthday,Address1,Address2,City,Postcode,StateId,UserId")] Contact contact)
         {
-            _userId = GetCuurrentuserId(); //why do this, Just use the Function
+            _userId = GetCurrentUserId(); 
             contact.UserId = _userId;
+            ModelState.Clear();
+            TryValidateModel(contact); //fixes errors in the course material. Hopeless tacher
             if (ModelState.IsValid)
             {
+                
                 db.Contacts.Add(contact);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -77,18 +82,18 @@ namespace ContactWebDNF.Controllers
         // GET: Contacts/Edit/5
         public ActionResult Edit(int? id)
         {
-            
+            _userId = GetCurrentUserId(); 
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Contact contact = db.Contacts.FirstOrDefault(x => x.Id == id && x.UserId == GetCuurrentuserId());
+            Contact contact = db.Contacts.FirstOrDefault(x => x.Id == id && x.UserId == GetCurrentUserId());
             if (contact == null)
             {
                 return HttpNotFound();
             }
             ViewBag.StateId = new SelectList(db.States, "Id", "Name", contact.StateId);
-            ViewBag.UserId = GetCuurrentuserId();
+            ViewBag.UserId = _userId;
             return View(contact);
         }
 
@@ -99,7 +104,8 @@ namespace ContactWebDNF.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "Id,FirstName,LastName,Email,Phone,Birthday,Address1,Address2,City,Postcode,StateId,UserId")] Contact contact)
         {
-           contact.UserId = GetCuurrentuserId();
+            _userId = GetCurrentUserId(); //why do this, Just use the Function, cuz linq cant use the function
+            contact.UserId = _userId;
             ModelState.Clear();
             TryValidateModel(contact); //fixes errors in the course material. Hopeless tacher
             if (ModelState.IsValid)
@@ -116,11 +122,12 @@ namespace ContactWebDNF.Controllers
         // GET: Contacts/Delete/5
         public ActionResult Delete(int? id)
         {
+            _userId = GetCurrentUserId(); //why do this, Just use the Function
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Contact contact = db.Contacts.FirstOrDefault(x => x.Id == id && x.UserId == GetCuurrentuserId());
+            Contact contact = db.Contacts.FirstOrDefault(x => x.Id == id && x.UserId == _userId);
             if (contact == null)
             {
                 return HttpNotFound();
@@ -133,7 +140,7 @@ namespace ContactWebDNF.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            _userId = GetCuurrentuserId();
+            _userId = GetCurrentUserId();
             Contact contact = db.Contacts.Find(id);
             db.Contacts.Remove(contact);
             db.SaveChanges();
@@ -149,7 +156,7 @@ namespace ContactWebDNF.Controllers
             base.Dispose(disposing);
         }
 
-        protected string GetCuurrentuserId()
+        protected string GetCurrentUserId()
         {
             return User.Identity.GetUserId();
         }

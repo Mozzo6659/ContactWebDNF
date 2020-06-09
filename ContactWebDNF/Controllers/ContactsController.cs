@@ -19,21 +19,20 @@ namespace ContactWebDNF.Controllers
         // GET: Contacts
         public ActionResult Index()
         {
-            _userId = GetCuurrentuserId();
-
-            var contacts = db.Contacts.Include(c => c.State).Include(c => c.User);
+            //limit contacts to only those for this user
+            var contacts = db.Contacts.Include(c => c.State).Include(c => c.User).Where(x => x.UserId == GetCuurrentuserId());
             return View(contacts.ToList());
         }
 
         // GET: Contacts/Details/5
         public ActionResult Details(int? id)
         {
-            _userId = GetCuurrentuserId();
+           
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Contact contact = db.Contacts.Find(id);
+            Contact contact = db.Contacts.FirstOrDefault(x => x.Id == id && x.UserId == GetCuurrentuserId());
             if (contact == null)
             {
                 return HttpNotFound();
@@ -45,8 +44,11 @@ namespace ContactWebDNF.Controllers
         public ActionResult Create()
         {
             _userId = GetCuurrentuserId();
+            
+            
+
             ViewBag.StateId = new SelectList(db.States, "Id", "Name");
-            ViewBag.UserId = new SelectList(db.ApplicationUsers, "Id", "Email");
+            ViewBag.UserId = _userId;
             return View();
         }
 
@@ -57,7 +59,8 @@ namespace ContactWebDNF.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Id,FirstName,LastName,Email,Phone,Birthday,Address1,Address2,City,Postcode,StateId,UserId")] Contact contact)
         {
-            _userId = GetCuurrentuserId();
+            _userId = GetCuurrentuserId(); //why do this, Just use the Function
+            contact.UserId = _userId;
             if (ModelState.IsValid)
             {
                 db.Contacts.Add(contact);
@@ -66,25 +69,26 @@ namespace ContactWebDNF.Controllers
             }
 
             ViewBag.StateId = new SelectList(db.States, "Id", "Name", contact.StateId);
-            ViewBag.UserId = new SelectList(db.ApplicationUsers, "Id", "Email", contact.UserId);
+            ViewBag.UserId = _userId;
+
             return View(contact);
         }
 
         // GET: Contacts/Edit/5
         public ActionResult Edit(int? id)
         {
-            _userId = GetCuurrentuserId();
+            
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Contact contact = db.Contacts.Find(id);
+            Contact contact = db.Contacts.FirstOrDefault(x => x.Id == id && x.UserId == GetCuurrentuserId());
             if (contact == null)
             {
                 return HttpNotFound();
             }
             ViewBag.StateId = new SelectList(db.States, "Id", "Name", contact.StateId);
-            ViewBag.UserId = new SelectList(db.ApplicationUsers, "Id", "Email", contact.UserId);
+            ViewBag.UserId = GetCuurrentuserId();
             return View(contact);
         }
 
@@ -95,7 +99,9 @@ namespace ContactWebDNF.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "Id,FirstName,LastName,Email,Phone,Birthday,Address1,Address2,City,Postcode,StateId,UserId")] Contact contact)
         {
-            _userId = GetCuurrentuserId();
+           contact.UserId = GetCuurrentuserId();
+            ModelState.Clear();
+            TryValidateModel(contact); //fixes errors in the course material. Hopeless tacher
             if (ModelState.IsValid)
             {
                 db.Entry(contact).State = EntityState.Modified;
@@ -103,7 +109,7 @@ namespace ContactWebDNF.Controllers
                 return RedirectToAction("Index");
             }
             ViewBag.StateId = new SelectList(db.States, "Id", "Name", contact.StateId);
-            ViewBag.UserId = new SelectList(db.ApplicationUsers, "Id", "Email", contact.UserId);
+            
             return View(contact);
         }
 
@@ -114,7 +120,7 @@ namespace ContactWebDNF.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Contact contact = db.Contacts.Find(id);
+            Contact contact = db.Contacts.FirstOrDefault(x => x.Id == id && x.UserId == GetCuurrentuserId());
             if (contact == null)
             {
                 return HttpNotFound();

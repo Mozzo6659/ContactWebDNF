@@ -81,8 +81,8 @@ namespace ContactWebDNF
                 roleManager.Create(role);
 
                 var user = new ApplicationUser();
-                user.UserName = "testsuper@test.com"; //these need to be the same or it doesnt woirk
-                user.Email = "testsuper@test.com";
+                user.UserName = "mossmanm"; 
+                user.Email = "mossmanm@yahoo.com.au";
 
                 var chkuser = userManager.Create(user, "mudguts36");
 

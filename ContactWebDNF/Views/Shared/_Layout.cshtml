@@ -20,15 +20,30 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
                     @Html.Partial("_LoginPartial")
                     <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
+                        <li class="@(ViewContext.RouteData.Values["Action"].ToString() == "Index"
+                            && ViewContext.RouteData.Values["Controller"].ToString() == "Home" ? "nav-item active" : "nav-item")">
                             @Html.ActionLink("Home", "Index", "Home", new { area = "" }, new { @class = "nav-link text-light" })
                         </li>
-                        <li class="nav-item">
+                        <li class="@(ViewContext.RouteData.Values["Action"].ToString() == "About" ? "nav-item active" : "nav-item")">
                             @Html.ActionLink("About", "About", "Home", new { area = "" }, new { @class = "nav-link text-light" })
                         </li>
-                        <li class="nav-item">
+                        <li class="@(ViewContext.RouteData.Values["Action"].ToString() == "Contact" ? "nav-item active" : "nav-item")">
                             @Html.ActionLink("Contact", "Contact", "Home", new { area = "" }, new { @class = "nav-link text-light" })
                         </li>
+                        @if (User.IsInRole("Admin"))
+                        {
+                            <li class="@(ViewContext.RouteData.Values["Controller"].ToString() == "States" ? "nav-item active" : "nav-item")">
+                                @Html.ActionLink("States", "Index", "States", new { area = "" }, new { @class = "nav-link text-light" })
+                            </li>
+
+                        }
+                        @if (User.Identity.Name.Length > 0)
+                        {
+                            <li class="@(ViewContext.RouteData.Values["Controller"].ToString() == "Contacts" ? "nav-item active" : "nav-item")">
+                                @Html.ActionLink("My Contacts", "Index", "Contacts", new { area = "" }, new { @class = "nav-link text-light" })
+                            </li>
+
+                        }
                     </ul>
 
                 </div>

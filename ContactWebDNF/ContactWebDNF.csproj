@@ -193,6 +193,10 @@
     <Compile Include="Migrations\202006090607149_Chnge address 2.designer.cs">
       <DependentUpon>202006090607149_Chnge address 2.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202006100110223_ChangeAddress2.cs" />
+    <Compile Include="Migrations\202006100110223_ChangeAddress2.designer.cs">
+      <DependentUpon>202006100110223_ChangeAddress2.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Contact.cs" />
@@ -401,6 +405,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202006090607149_Chnge address 2.resx">
       <DependentUpon>202006090607149_Chnge address 2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202006100110223_ChangeAddress2.resx">
+      <DependentUpon>202006100110223_ChangeAddress2.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

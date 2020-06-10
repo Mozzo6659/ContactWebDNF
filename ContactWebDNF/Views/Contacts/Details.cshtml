@@ -4,21 +4,13 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
+<h2>@ViewBag.Title - @Model.ContactFullName</h2>
 
 <div>
     <h4>Contact</h4>
     <hr />
     <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.State.Name)
-        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.State.Name)
-        </dd>
-
-        
         <dt>
             @Html.DisplayNameFor(model => model.ContactFullName)
         </dt>
@@ -59,13 +51,17 @@
             @Html.DisplayFor(model => model.Address1)
         </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Address2)
-        </dt>
+        @if (!string.IsNullOrWhiteSpace(Model.Address2))
+        {
+            <dt>
+                @Html.DisplayNameFor(model => model.Address2)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Address2)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.Address2)
+            </dd>
+        }
+
 
         <dt>
             @Html.DisplayNameFor(model => model.City)

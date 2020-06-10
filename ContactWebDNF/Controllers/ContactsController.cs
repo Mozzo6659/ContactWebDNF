@@ -63,6 +63,7 @@ namespace ContactWebDNF.Controllers
         {
             _userId = GetCurrentUserId(); 
             contact.UserId = _userId;
+            //I changed the model to make Address2 not required. and this blew up the validation ModelState.IsValid was always false
             ModelState.Clear();
             TryValidateModel(contact); //fixes errors in the course material. Hopeless tacher
             if (ModelState.IsValid)
@@ -87,7 +88,7 @@ namespace ContactWebDNF.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Contact contact = db.Contacts.FirstOrDefault(x => x.Id == id && x.UserId == GetCurrentUserId());
+            Contact contact = db.Contacts.FirstOrDefault(x => x.Id == id && x.UserId == _userId);
             if (contact == null)
             {
                 return HttpNotFound();
@@ -102,9 +103,10 @@ namespace ContactWebDNF.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,FirstName,LastName,Email,Phone,Birthday,Address1,Address2,City,Postcode,StateId,UserId")] Contact contact)
+        public ActionResult Edit([Bind(Include = "Id,FirstName,LastName,Email,Phone,Birthday,Address1,Address2,City,Postcode,StateId")] Contact contact)
         {
             _userId = GetCurrentUserId(); //why do this, Just use the Function, cuz linq cant use the function
+            
             contact.UserId = _userId;
             ModelState.Clear();
             TryValidateModel(contact); //fixes errors in the course material. Hopeless tacher

@@ -99,8 +99,10 @@
                 @Html.DisplayFor(modelItem => item.Postcode)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                @*@Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.Id })*@
+                <a href="/Contacts/Edit/@item.Id"><img src="/Images/edit-icon.png"></a>
+                <a href="/Contacts/Delete/@item.Id"><img src="/Images/delete-icon.png"></a>
             </td>
         </tr>
         }

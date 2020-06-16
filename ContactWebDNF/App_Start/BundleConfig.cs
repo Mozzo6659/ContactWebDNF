@@ -29,7 +29,7 @@ namespace ContactWebDNF
                       "~/Content/bootstrap.css",
                       "~/Content/DataTables/datatables.min.css",
                       "~/Content/DataTables/jquery.dataTables.min.css",
-                      "~/Content/site.css"));
+                      "~/Content/Site.css"));
         }
     }
 }

@@ -54,6 +54,7 @@
             <th>
                 @Html.DisplayNameFor(model => model.Postcode)
             </th>
+            <th></th>
             <th class="tablehdrcolend">
 
             </th>
@@ -68,12 +69,7 @@
             <td>
                 @Html.DisplayFor(modelItem => item.State.Abbreviation)
             </td>
-            @*
-        <td>
-            @Html.DisplayFor(modelItem => item.FirstName)
-        </td>
-            *@
-            <td>
+           <td>
                 @Html.DisplayFor(modelItem => item.FirstName)
                 @Html.DisplayFor(modelItem => item.LastName)
             </td>
@@ -100,8 +96,10 @@
             </td>
             <td>
                 @*@Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.Id })*@
+            @Html.ActionLink("Delete", "Delete", new { id = item.Id })*@
                 <a href="/Contacts/Edit/@item.Id"><img src="/Images/edit-icon.png"></a>
+            </td>
+            <td>
                 <a href="/Contacts/Delete/@item.Id"><img src="/Images/delete-icon.png"></a>
             </td>
         </tr>
@@ -114,5 +112,10 @@
 {
     <script type="text/javascript">
         $("#contacts_table").DataTable();
+
+        $(document).ready(function () {
+            $("#contacts_table tr:even").css("background-color", "#87a7ff");
+            $("#contacts_table tr:odd").css("background-color", "#ffbc8f");
+        });
     </script>
 }

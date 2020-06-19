@@ -10,55 +10,55 @@
 
 </head>
 <body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-nav transpar">
-        <div class="container">
-            <i class="ion-earth"></i>@Html.ActionLink("Contact Web 2020", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbar-SupportedContent"
-                    aria-expanded="false" aria-label="Toggle Navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
-                @Html.Partial("_LoginPartial")
-                <ul class="navbar-nav flex-grow-1">
-                    <li class="@(ViewContext.RouteData.Values["Action"].ToString() == "Index"
+   
+        <header>
+            <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-nav transpar">
+                <div class="container">
+                    @Html.ActionLink("Contact Web 2020", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbar-SupportedContent"
+                            aria-expanded="false" aria-label="Toggle Navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
+                        @Html.Partial("_LoginPartial")
+                        <ul class="navbar-nav flex-grow-1">
+                            <li class="@(ViewContext.RouteData.Values["Action"].ToString() == "Index"
                             && ViewContext.RouteData.Values["Controller"].ToString() == "Home" ? "nav-item active" : "nav-item")">
-                        @Html.ActionLink("Home", "Index", "Home", new { area = "" }, new { @class = "nav-link text-light" })
-                    </li>
-                    <li class="@(ViewContext.RouteData.Values["Action"].ToString() == "About" ? "nav-item active" : "nav-item")">
-                        @Html.ActionLink("About", "About", "Home", new { area = "" }, new { @class = "nav-link text-light" })
-                    </li>
-                    <li class="@(ViewContext.RouteData.Values["Action"].ToString() == "Contact" ? "nav-item active" : "nav-item")">
-                        @Html.ActionLink("Contact", "Contact", "Home", new { area = "" }, new { @class = "nav-link text-light" })
-                    </li>
-                    @if (User.IsInRole("Admin"))
-                    {
-                        <li class="@(ViewContext.RouteData.Values["Controller"].ToString() == "States" ? "nav-item active" : "nav-item")">
-                            @Html.ActionLink("States", "Index", "States", new { area = "" }, new { @class = "nav-link text-light" })
-                        </li>
+                                @Html.ActionLink("Home", "Index", "Home", new { area = "" }, new { @class = "nav-link text-light" })
+                            </li>
+                            <li class="@(ViewContext.RouteData.Values["Action"].ToString() == "About" ? "nav-item active" : "nav-item")">
+                                @Html.ActionLink("About", "About", "Home", new { area = "" }, new { @class = "nav-link text-light" })
+                            </li>
+                            <li class="@(ViewContext.RouteData.Values["Action"].ToString() == "Contact" ? "nav-item active" : "nav-item")">
+                                @Html.ActionLink("Contact", "Contact", "Home", new { area = "" }, new { @class = "nav-link text-light" })
+                            </li>
+                            @if (User.IsInRole("Admin"))
+                            {
+                                <li class="@(ViewContext.RouteData.Values["Controller"].ToString() == "States" ? "nav-item active" : "nav-item")">
+                                    @Html.ActionLink("States", "Index", "States", new { area = "" }, new { @class = "nav-link text-light" })
+                                </li>
 
-                    }
-                    @if (User.Identity.Name.Length > 0)
-                    {
-                        <li class="@(ViewContext.RouteData.Values["Controller"].ToString() == "Contacts" ? "nav-item active" : "nav-item")">
-                            @Html.ActionLink("My Contacts", "Index", "Contacts", new { area = "" }, new { @class = "nav-link text-light" })
-                        </li>
+                            }
+                            @if (User.Identity.Name.Length > 0)
+                            {
+                                <li class="@(ViewContext.RouteData.Values["Controller"].ToString() == "Contacts" ? "nav-item active" : "nav-item")">
+                                    @Html.ActionLink("My Contacts", "Index", "Contacts", new { area = "" }, new { @class = "nav-link text-light" })
+                                </li>
 
-                    }
-                </ul>
+                            }
+                        </ul>
 
-            </div>
+                    </div>
+                </div>
+            </nav>
+        </header>
+
+        <div class="container">
+            <main role="main" class="pb-3">
+                @RenderBody()
+            </main>
         </div>
-        </nav>
-    </header>
-
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
-    </div>
-
-
+       
     <footer class="border-top footer text-muted">
         <div class="container">
             &copy; 2020 - Contact W4eb 2020

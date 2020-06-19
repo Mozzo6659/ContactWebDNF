@@ -1,12 +1,26 @@
-﻿/*https://unsplash.com/backgrounds*/
+﻿/*https://unsplash.com/backgrounds   for background pics*/
+/*https://www.w3schools.com/howto/howto_css_blurred_background.asp*/
 body {
-   /*background-color: #59a677;*/
-   background-image: url("../Images/Cover-Surf.jpg");
-   background-color: #fff;
-    padding-top: 50px;
+    /*background-color: #59a677;*/
+    background-image: url("../Images/Cover-Surf.jpg");
+    height: 100%;
+    background-color: #fff;
+    /*padding-top: 50px;*/
     padding-bottom: 20px;
 }
-
+/* blur example
+.bg-image {
+    
+    /*filter: blur(8px);
+    -webkit-filter: blur(8px);
+    
+    height: 90%;
+    /* Center and scale the image nicely 
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+    */
 /* Set padding to keep content from hitting the edges */
 .body-content {
     padding-left: 15px;
@@ -57,3 +71,36 @@ textarea {
    color: transparent;
     
 }
+
+.icon-grey-back {
+    background-color: lightgray;
+}
+
+.icon-big {
+    width: 10%;
+    font-size: 200%;
+    position: relative;
+    margin-right: 5px;
+    /*display:inline-block;
+    color: #209ebc;
+    text-align: left;
+    */
+}
+
+.icon-small {
+    display: inline-block;
+    width: 30px;
+    text-align: center;
+    color: #209ebc;
+    font-size: 110%;
+    /*secrets to aign text and icons*/
+    line-height: 120%;
+    vertical-align: middle;
+    margin-top: -2px;
+    margin-right: 10px;
+}
+/*
+jumbotron h1 {
+    width: 85%;
+}
+ */

@@ -6,15 +6,14 @@
     <title>@ViewBag.Title - Contact Web</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
-   
-   
+    
+
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-nav bg-secondary">
-        <!--<nav class="navbar flex-column">-->
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-nav transpar">
         <div class="container">
-            @Html.ActionLink("Contact Web 2020", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            <i class="ion-earth"></i>@Html.ActionLink("Contact Web 2020", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbar-SupportedContent"
                     aria-expanded="false" aria-label="Toggle Navigation">
                 <span class="navbar-toggler-icon"></span>

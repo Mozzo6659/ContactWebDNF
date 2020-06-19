@@ -32,6 +32,9 @@ namespace ContactWebDNF
                       "~/Content/fontawesome.min.css",
                       "~/Content/ionicons.min.css",
                       "~/Content/Site.css"));
+
+            /*bundles.Add(new ScriptBundle("~/bundles/fonts").Include(
+                        "~/fonts/ionicons.*"));*/
         }
     }
 }

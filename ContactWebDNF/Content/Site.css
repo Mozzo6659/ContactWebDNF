@@ -1,5 +1,8 @@
-﻿body {
-   background-color: #59a677;
+﻿/*https://unsplash.com/backgrounds*/
+body {
+   /*background-color: #59a677;*/
+   background-image: url("../Images/Cover-Surf.jpg");
+   background-color: #fff;
     padding-top: 50px;
     padding-bottom: 20px;
 }
@@ -49,4 +52,8 @@ textarea {
 }
 .tablehdrcolend {
     border-top-right-radius: 8px;
+}
+.transpar {
+   color: transparent;
+    
 }

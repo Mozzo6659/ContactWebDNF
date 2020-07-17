@@ -26,11 +26,10 @@ namespace ContactWebDNF
                       "~/Scripts/DataTables/datatables.min.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
-                      "~/Content/bootstrap.css",
+                      "~/Content/bootstrap.min.css",
                       "~/Content/DataTables/datatables.min.css",
                       "~/Content/DataTables/jquery.dataTables.min.css",
-                      "~/Content/fontawesome.min.css",
-                      "~/Content/ionicons.min.css",
+                      "~/Content/font-awesome.min.css",
                       "~/Content/Site.css"));
 
             /*bundles.Add(new ScriptBundle("~/bundles/fonts").Include(
